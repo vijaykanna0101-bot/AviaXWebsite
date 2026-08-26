@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AviaX — Arctic Intelligence</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+font-family:Inter,system-ui,Arial,sans-serif;
+background:#02070d;color:#eefbff;overflow-x:hidden;
+}
+body:before{
+content:"";position:fixed;inset:0;pointer-events:none;opacity:.25;
+background-image:radial-gradient(#9eeaff 1px,transparent 1px);
+background-size:55px 55px;animation:stars 18s linear infinite;
+}
+@keyframes stars{to{background-position:0 550px}}
+.orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:-1}
+.o1{width:400px;height:400px;background:#00cfff33;top:-100px;left:-100px;animation:float 8s ease-in-out infinite}
+.o2{width:350px;height:350px;background:#396bff30;right:-100px;top:35%;animation:float 10s ease-in-out infinite reverse}
+.o3{width:300px;height:300px;background:#00ffff22;left:30%;bottom:-150px;animation:float 9s ease-in-out infinite}
+@keyframes float{50%{transform:translate(35px,-30px) scale(1.15)}}
+
+nav{
+position:fixed;top:18px;left:50%;transform:translateX(-50%);
+width:min(1100px,92%);padding:13px 20px;z-index:10;
+display:flex;align-items:center;justify-content:space-between;
+background:#07121ccc;border:1px solid #9deeff24;
+border-radius:22px;backdrop-filter:blur(20px);
+box-shadow:0 15px 50px #0008;
+}
+.logo{display:flex;gap:10px;align-items:center;font-weight:800;font-size:20px}
+.logoIcon{
+width:38px;height:38px;border-radius:12px;
+display:grid;place-items:center;
+background:linear-gradient(135deg,#dfffff,#4bdcff,#526eff);
+color:#031017;box-shadow:0 0 25px #42dcff88;
+}
+nav a{color:#a9cbd5;text-decoration:none;margin-left:22px;font-size:14px}
+nav a:hover{color:#fff}
+
+.hero{
+min-height:100vh;display:flex;align-items:center;justify-content:center;
+text-align:center;padding:130px 20px 70px;position:relative;
+}
+.heroContent{max-width:900px;animation:enter 1.2s ease}
+@keyframes enter{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:none}}
+.badge{
+display:inline-block;padding:9px 15px;border:1px solid #8cecff44;
+background:#bdf5ff0b;border-radius:100px;color:#9eeeff;
+font-size:13px;letter-spacing:1px;margin-bottom:25px;
+box-shadow:0 0 35px #20dfff18;
+}
+h1{
+font-size:clamp(55px,10vw,120px);line-height:.9;
+letter-spacing:-6px;
+background:linear-gradient(110deg,#fff,#9fefff 35%,#4ddfff 65%,#7e8dff);
+-webkit-background-clip:text;color:transparent;
+text-shadow:0 0 70px #44dfff33;
+}
+.hero p{max-width:680px;margin:30px auto;color:#9bbbc5;font-size:18px;line-height:1.7}
+.buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{
+padding:15px 24px;border-radius:14px;text-decoration:none;font-weight:700;
+transition:.3s;display:inline-block;
+}
+.primary{background:linear-gradient(135deg,#cfffff,#45dfff,#627cff);color:#031017;box-shadow:0 0 35px #40dfff55}
+.secondary{border:1px solid #b9efff35;color:#d8faff;background:#ffffff08}
+.btn:hover{transform:translateY(-4px) scale(1.03)}
+
+section{padding:100px 7%;position:relative}
+.sectionTitle{text-align:center;margin-bottom:50px}
+.sectionTitle span{color:#66eaff;font-size:13px;letter-spacing:3px}
+.sectionTitle h2{font-size:clamp(34px,5vw,60px);margin-top:12px}
+.grid{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{
+padding:30px;border:1px solid #a9edff18;border-radius:25px;
+background:linear-gradient(145deg,#ffffff0b,#ffffff03);
+backdrop-filter:blur(14px);transition:.4s;
+position:relative;overflow:hidden;
+}
+.card:before{
+content:"";position:absolute;width:150px;height:150px;
+background:#46ddff22;filter:blur(60px);top:-80px;right:-50px;
+}
+.card:hover{transform:translateY(-10px);border-color:#75eaff66;box-shadow:0 20px 60px #00d9ff18}
+.icon{font-size:32px;margin-bottom:20px}
+.card h3{font-size:21px;margin-bottom:12px}
+.card p{color:#8daeb8;line-height:1.7;font-size:14px}
+
+.stats{
+max-width:1000px;margin:auto;display:grid;
+grid-template-columns:repeat(4,1fr);gap:15px
+}
+.stat{text-align:center;padding:25px;border-radius:20px;background:#ffffff06;border:1px solid #ffffff0d}
+.stat b{font-size:32px;display:block;color:#9ff4ff}
+.stat span{font-size:12px;color:#76939d}
+
+.showcase{
+max-width:1050px;margin:auto;padding:35px;border-radius:30px;
+background:#06121ae6;border:1px solid #6feaff22;
+box-shadow:0 30px 100px #0008;
+}
+.screen{
+border-radius:22px;background:#03090f;border:1px solid #7deaff20;
+min-height:390px;padding:25px;position:relative;overflow:hidden;
+}
+.screenTop{display:flex;gap:8px;margin-bottom:25px}
+.dot{width:10px;height:10px;border-radius:50%;background:#4adfff55}
+.aiMessage{
+max-width:700px;padding:20px;border-radius:20px;
+background:linear-gradient(135deg,#10222b,#07141c);
+border:1px solid #70eaff22;animation:pulse 3s infinite;
+}
+@keyframes pulse{50%{box-shadow:0 0 35px #00d9ff12}}
+.aiMessage strong{color:#9cefff}
+.aiMessage p{margin-top:10px;color:#8eabb5;line-height:1.7}
+.fakeInput{
+position:absolute;bottom:20px;left:25px;right:25px;
+padding:17px;border:1px solid #74eaff20;border-radius:16px;color:#64828b;
+background:#ffffff04;
+}
+
+.cta{text-align:center;padding-bottom:120px}
+.ctaBox{
+max-width:900px;margin:auto;padding:65px 30px;border-radius:35px;
+background:radial-gradient(circle at center,#12303b,#061018 60%);
+border:1px solid #72eaff2b;box-shadow:0 0 100px #00d9ff12;
+}
+.cta h2{font-size:clamp(35px,6vw,65px);margin-bottom:20px}
+.cta p{color:#8eabb4;margin-bottom:30px}
+
+footer{
+border-top:1px solid #ffffff0b;padding:30px 7%;
+display:flex;justify-content:space-between;color:#66818a;font-size:13px;
+}
+
+@media(max-width:800px){
+nav{padding:10px 14px}nav .links{display:none}
+.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}
+h1{letter-spacing:-3px}.hero p{font-size:16px}
+footer{flex-direction:column;gap:10px}
+}
+
+.reveal{opacity:0;transform:translateY(40px);transition:1s}
+.reveal.show{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+
+<nav>
+<div class="logo"><div class="logoIcon">✦</div>AviaX</div>
+<div class="links">
+<a href="#features">Features</a>
+<a href="#technology">Technology</a>
+<a href="#experience">Experience</a>
+<a href="#start">Launch</a>
+</div>
+</nav>
+
+<header class="hero">
+<div class="heroContent">
+<div class="badge">✦ THE NEXT GENERATION OF AI</div>
+<h1>AVIA<span>X</span></h1>
+<p>
+An intelligent digital companion built for conversation, creation,
+research and productivity — wrapped in a futuristic Arctic interface.
+</p>
+<div class="buttons">
+<a class="btn primary" href="#start">Explore AviaX →</a>
+<a class="btn secondary" href="#features">Discover Features</a>
+</div>
+</div>
+</header>
+
+<section id="features">
+<div class="sectionTitle reveal">
+<span>CAPABILITIES</span><h2>Intelligence without limits.</h2>
+</div>
+<div class="grid">
+<div class="card reveal"><div class="icon">◈</div><h3>AI Conversation</h3><p>Natural conversations designed to help you think, learn, create and solve problems faster.</p></div>
+<div class="card reveal"><div class="icon">⌁</div><h3>Voice Interaction</h3><p>Talk naturally with AviaX using fast and intuitive voice interaction.</p></div>
+<div class="card reveal"><div class="icon">◫</div><h3>File Intelligence</h3><p>Work with documents, images and other files while keeping everything inside your workflow.</p></div>
+<div class="card reveal"><div class="icon">⌘</div><h3>Smart Tools</h3><p>A growing collection of intelligent tools designed around productivity and creativity.</p></div>
+<div class="card reveal"><div class="icon">◉</div><h3>Personal Memory</h3><p>Build a more useful experience by keeping important preferences and context available.</p></div>
+<div class="card reveal"><div class="icon">⚡</div><h3>Fast Experience</h3><p>A responsive interface engineered to make every interaction feel instant and fluid.</p></div>
+</div>
+</section>
+
+<section id="technology">
+<div class="sectionTitle reveal"><span>THE SYSTEM</span><h2>Built for the future.</h2></div>
+<div class="stats">
+<div class="stat reveal"><b>AI</b><span>INTELLIGENCE</span></div>
+<div class="stat reveal"><b>∞</b><span>POSSIBILITIES</span></div>
+<div class="stat reveal"><b>24/7</b><span>READY</span></div>
+<div class="stat reveal"><b>1</b><span>UNIFIED EXPERIENCE</span></div>
+</div>
+</section>
+
+<section id="experience">
+<div class="sectionTitle reveal">
+<span>EXPERIENCE</span><h2>Meet your new AI interface.</h2>
+</div>
+<div class="showcase reveal">
+<div class="screen">
+<div class="screenTop"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div>
+<div class="aiMessage">
+<strong>✦ AviaX Intelligence</strong>
+<p>
+Hello. I'm ready to help you explore ideas, understand information,
+create content and turn your next idea into something real.
+</p>
+</div>
+<div class="fakeInput">Ask AviaX anything… <span style="float:right">➤</span></div>
+</div>
+</div>
+</section>
+
+<section id="start" class="cta">
+<div class="ctaBox reveal">
+<h2>Enter the Arctic.</h2>
+<p>The future of your AI experience starts here.</p>
+<a class="btn primary" href="#features">Enter AviaX ✦</a>
+</div>
+</section>
+
+<footer>
+<span>© 2026 AviaX</span>
+<span>Artificial Intelligence • Built with vision</span>
+</footer>
+
+<script>
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("show")})
+},{threshold:.12});
+document.querySelectorAll(".reveal").forEach(x=>observer.observe(x));
+
+document.addEventListener("mousemove",e=>{
+document.querySelectorAll(".orb").forEach((o,i)=>{
+const s=(i+1)*.008;
+o.style.transform=`translate(${e.clientX*s}px,${e.clientY*s}px)`;
+});
+});
+</script>
+
+</body>
+</html>
