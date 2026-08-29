@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aviaxwebsite.onrender.com/sitemap.xml
